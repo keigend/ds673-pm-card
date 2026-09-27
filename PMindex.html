@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Final Project Management Card — DS673.02</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --chalk: #F6F2E9; --chalk-2: #EFE9DA; --ink: #1C2321; --ink-soft: #3A413D;
+    --muted: #78705F; --clay: #A6432B; --clay-deep: #7E301C; --court: #2F4B3C;
+    --court-soft: #4C6A57; --line: #DCD3C0; --line-strong: #C7BBA0; --white: #FFFDF8;
+    --amber: #B8791A; --amber-bg: #F3E6CE;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --chalk:#171512; --chalk-2:#1E1B17; --ink:#EDE7D9; --ink-soft:#C9C1AE; --muted:#948B77;
+      --clay:#E1785E; --clay-deep:#F0947C; --court:#7CA98C; --court-soft:#9BC0A9;
+      --line:#3A362E; --line-strong:#4A4536; --white:#211E1A; --amber:#E0A94A; --amber-bg:#3A2F1A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --chalk:#171512; --chalk-2:#1E1B17; --ink:#EDE7D9; --ink-soft:#C9C1AE; --muted:#948B77;
+    --clay:#E1785E; --clay-deep:#F0947C; --court:#7CA98C; --court-soft:#9BC0A9;
+    --line:#3A362E; --line-strong:#4A4536; --white:#211E1A; --amber:#E0A94A; --amber-bg:#3A2F1A;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--chalk); color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 16px; line-height: 1.55;
+    padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px 70px; }
+  header { padding: 56px 0 32px; border-bottom: 1px solid var(--line); }
+  .kicker { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--court); margin: 0 0 16px; }
+  h1 {
+    font-family: "Fraunces", Georgia, serif; font-optical-sizing: auto; font-weight: 600;
+    font-size: clamp(1.9rem, 4.5vw, 2.6rem); line-height: 1.1; letter-spacing: -0.01em;
+    margin: 0 0 14px; color: var(--ink);
+  }
+  .dek { color: var(--ink-soft); max-width: 62ch; margin: 0 0 22px; }
+  .byline { font-size: 0.88rem; color: var(--muted); display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+  .byline .dot { color: var(--line-strong); }
+
+  section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 {
+    font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.4rem;
+    margin: 0 0 6px; display:flex; align-items:center; gap:10px;
+  }
+  h2 .dotmark { width: 10px; height: 10px; border-radius: 50%; display:inline-block; }
+  .todo .dotmark { background: var(--amber); }
+  .done .dotmark { background: var(--court); }
+  .blockers .dotmark { background: var(--clay); }
+  .sec-count {
+    font-family:"IBM Plex Mono",monospace; font-size:0.78rem; color:var(--muted);
+    border:1px solid var(--line-strong); border-radius: 20px; padding: 2px 10px; margin-left: 4px;
+  }
+  .sec-note { color: var(--muted); font-size: 0.9rem; margin: 0 0 20px; }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.92rem; }
+  thead th {
+    text-align: left; font-family:"IBM Plex Mono",monospace; font-weight: 500; font-size: 0.72rem;
+    letter-spacing: 0.02em; color: var(--muted); background: var(--chalk-2);
+    padding: 10px 16px; border-bottom: 1px solid var(--line-strong);
+  }
+  td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-soft); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--chalk-2); }
+  td.tasknum { font-family:"IBM Plex Mono",monospace; color: var(--muted); white-space: nowrap; }
+  td.taskname { color: var(--ink); font-weight: 500; min-width: 220px; }
+  td.owner { white-space: nowrap; }
+  td.date { white-space: nowrap; font-family:"IBM Plex Mono",monospace; font-size: 0.85rem; color: var(--muted); }
+  .done table td { color: var(--ink-soft); }
+  .done table td.taskname { text-decoration: none; }
+  .pill {
+    display: inline-block; font-size: 0.72rem; font-family:"IBM Plex Mono",monospace;
+    border-radius: 20px; padding: 2px 9px;
+  }
+  .pill.open { color: var(--amber); border: 1px solid var(--amber); }
+  .pill.done { color: var(--court); border: 1px solid var(--court-soft); }
+  .pill.blocked { color: var(--clay-deep); border: 1px solid var(--clay); }
+
+  .empty-row td { color: var(--muted); font-style: italic; text-align: center; padding: 22px 16px; }
+
+  footer { padding: 34px 0 0; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="kicker">DS673.02 · Sports Analytics — Final Project</p>
+    <h1>Final Project Management Card</h1>
+    <p class="dek">Live tracker for the tennis analytics final project — what's open, what's done, and what's blocking progress.</p>
+    <div class="byline">
+      <span>Keigen</span><span class="dot">·</span><span>Instructor: Jing Wang</span><span class="dot">·</span><span>Updated Sep 27, 2026</span>
+    </div>
+  </header>
+
+  <section class="todo">
+    <h2><span class="dotmark"></span> To-Do <span class="sec-count">5 open</span></h2>
+    <p class="sec-note">Task # refers to the project instructions (Task 1–6). Completion Date here is the target date, not confirmation it's done.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Task #</th><th>Task</th><th>Owner</th><th>Target Completion</th></tr></thead>
+        <tbody>
+          <tr><td class="tasknum">1</td><td class="taskname">Tennis analytics research write-up (candidate analyses + citations)</td><td class="owner">Keigen</td><td class="date">09/28/2026</td></tr>
+          <tr><td class="tasknum">2</td><td class="taskname">Conceptual ERD design</td><td class="owner">TBD</td><td class="date">10/16/2026</td></tr>
+          <tr><td class="tasknum">2</td><td class="taskname">Normalize entities in the ERD</td><td class="owner">TBD</td><td class="date">10/30/2026</td></tr>
+          <tr><td class="tasknum">5</td><td class="taskname">Conduct analytics on the data (SQL + viz)</td><td class="owner">TBD</td><td class="date">12/04/2026</td></tr>
+          <tr><td class="tasknum">3</td><td class="taskname">Implement database on AWS &amp; migrate 2010–2019 data</td><td class="owner">TBD</td><td class="date">12/14/2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="done">
+    <h2><span class="dotmark"></span> Completed Tasks <span class="sec-count">3 done</span></h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Task #</th><th>Task</th><th>Owner</th><th>Completion Date</th></tr></thead>
+        <tbody>
+          <tr><td class="tasknum">1</td><td class="taskname">Chose dataset — ATP 2023 qualifying + Challenger matches</td><td class="owner">Keigen</td><td class="date">09/23/2026</td></tr>
+          <tr><td class="tasknum">1</td><td class="taskname">Pros/cons write-up for chosen dataset</td><td class="owner">Keigen</td><td class="date">09/27/2026</td></tr>
+          <tr><td class="tasknum">1</td><td class="taskname">Data dictionary — all 49 columns documented</td><td class="owner">Keigen</td><td class="date">09/27/2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="blockers">
+    <h2><span class="dotmark"></span> Blockers <span class="sec-count">0 open</span></h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Task #</th><th>Action Required to Fix Blocker</th><th>Completion</th></tr></thead>
+        <tbody>
+          <tr class="empty-row"><td colspan="3">No active blockers — add a row here if something stalls the team</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    DS673.02 Final Project · instructor Jing. Update owners and dates as the team fills them in.
+  </footer>
+
+</div>
+</body>
+</html>
