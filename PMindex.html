@@ -87,6 +87,8 @@
   .pill.blocked { color: var(--clay-deep); border: 1px solid var(--clay); }
 
   .empty-row td { color: var(--muted); font-style: italic; text-align: center; padding: 22px 16px; }
+  .tasknote { display: block; color: var(--muted); font-size: 0.82rem; font-weight: 400; margin-top: 3px; }
+  td.date .pill { margin-left: 6px; }
 
   footer { padding: 34px 0 0; font-size: 0.85rem; color: var(--muted); }
 </style>
@@ -99,33 +101,39 @@
     <h1>Final Project Management Card</h1>
     <p class="dek">Live tracker for the tennis analytics final project — what's open, what's done, and what's blocking progress.</p>
     <div class="byline">
-      <span>Keigen, Nate, Gabe, Ava</span><span class="dot">·</span><span>Instructor: Jing Wang</span><span class="dot">·</span><span>Updated Sep 27, 2026</span>
+      <span>Keigen, Nate, Gabe, Ava</span><span class="dot">·</span><span>Instructor: Jing Wang</span><span class="dot">·</span><span>Updated Oct 20, 2026</span>
     </div>
   </header>
 
   <section class="todo">
-    <h2><span class="dotmark"></span> To-Do <span class="sec-count">5 open</span></h2>
+    <h2><span class="dotmark"></span> To-Do <span class="sec-count">6 open</span></h2>
     <p class="sec-note">Task # refers to the project instructions (Task 1–6). Completion Date here is the target date, not confirmation it's done.</p>
     <div class="table-scroll">
       <table>
         <thead><tr><th>Task #</th><th>Task</th><th>Owner</th><th>Target Completion</th></tr></thead>
         <tbody>
-          <tr><td class="tasknum">1</td><td class="taskname">Tennis analytics research write-up (candidate analyses + citations)</td><td class="owner">Keigen</td><td class="date">09/28/2026</td></tr>
-          <tr><td class="tasknum">2</td><td class="taskname">Conceptual ERD design</td><td class="owner">TBD</td><td class="date">10/16/2026</td></tr>
-          <tr><td class="tasknum">2</td><td class="taskname">Normalize entities in the ERD</td><td class="owner">TBD</td><td class="date">10/30/2026</td></tr>
-          <tr><td class="tasknum">5</td><td class="taskname">Conduct analytics on the data (SQL + viz)</td><td class="owner">TBD</td><td class="date">12/04/2026</td></tr>
-          <tr><td class="tasknum">3</td><td class="taskname">Implement database on AWS &amp; migrate 2010–2019 data</td><td class="owner">TBD</td><td class="date">12/14/2026</td></tr>
+          <tr><td class="tasknum">1</td><td class="taskname">Tennis analytics research write-up (candidate analyses + citations)<span class="tasknote">Required by Task 1. The six information requirements from the data dictionary can seed the list of analyses.</span></td><td class="owner">Keigen</td><td class="date">09/28/2026<span class="pill blocked">overdue</span></td></tr>
+          <tr><td class="tasknum">5</td><td class="taskname">Conduct analytics on the data (SQL + viz)<span class="tasknote">Write 5–8 queries against the six information requirements, such as surface win rate and upsets by ranking band.</span></td><td class="owner">TBD</td><td class="date">12/04/2026</td></tr>
+          <tr><td class="tasknum">3</td><td class="taskname">Implement database on AWS &amp; migrate 2010–2019 data<span class="tasknote">DDL, load script and validation are ready to reuse. Waiting on the data scope blocker below.</span></td><td class="owner">TBD</td><td class="date">12/14/2026</td></tr>
+          <tr><td class="tasknum">3</td><td class="taskname">Identify the data critical for the analytical tasks</td><td class="owner">TBD</td><td class="date">12/14/2026</td></tr>
+          <tr><td class="tasknum">6</td><td class="taskname">Final report (executive summary, data, database design, potential, reflection)</td><td class="owner">TBD</td><td class="date">12/14/2026</td></tr>
+          <tr><td class="tasknum">6</td><td class="taskname">Final presentation</td><td class="owner">TBD</td><td class="date">Presentation Day</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section class="done">
-    <h2><span class="dotmark"></span> Completed Tasks <span class="sec-count">3 done</span></h2>
+    <h2><span class="dotmark"></span> Completed Tasks <span class="sec-count">8 done</span></h2>
     <div class="table-scroll">
       <table>
         <thead><tr><th>Task #</th><th>Task</th><th>Owner</th><th>Completion Date</th></tr></thead>
         <tbody>
+          <tr><td class="tasknum">2</td><td class="taskname">Conceptual ERD design<span class="tasknote">7 tables in MySQL Workbench, crow's foot notation, identifying vs non-identifying lines, min and max cardinality on every relationship.</span></td><td class="owner">Keigen</td><td class="date">10/20/2026</td></tr>
+          <tr><td class="tasknum">2</td><td class="taskname">Normalize entities in the ERD<span class="tasknote">Winner and loser columns unpivoted into player_match. Rank, age and seed moved to tournament_entry because they change per event.</span></td><td class="owner">Keigen</td><td class="date">10/20/2026</td></tr>
+          <tr><td class="tasknum">2</td><td class="taskname">Transform the ERD into a working relational design<span class="tasknote">MySQL DDL with primary keys, foreign keys, UNIQUE and 30 CHECK constraints.</span></td><td class="owner">Keigen</td><td class="date">10/20/2026</td></tr>
+          <tr><td class="tasknum">2</td><td class="taskname">Final data dictionary v2<span class="tasknote">Every count recomputed from the data. 20 errors in the first dictionary corrected and 21 cleaning rules documented.</span></td><td class="owner">Keigen</td><td class="date">10/20/2026</td></tr>
+          <tr><td class="tasknum">3</td><td class="taskname">Local MySQL prototype loaded and validated (2023 data)<span class="tasknote">10,663 matches loaded into MySQL 8.4. 100 validation checks pass. Not on AWS yet.</span></td><td class="owner">Keigen</td><td class="date">10/20/2026<span class="pill open">partial</span></td></tr>
           <tr><td class="tasknum">1</td><td class="taskname">Chose dataset — ATP 2023 qualifying + Challenger matches</td><td class="owner">Keigen</td><td class="date">09/23/2026</td></tr>
           <tr><td class="tasknum">1</td><td class="taskname">Pros/cons write-up for chosen dataset</td><td class="owner">Keigen</td><td class="date">09/27/2026</td></tr>
           <tr><td class="tasknum">1</td><td class="taskname">Data dictionary — all 49 columns documented</td><td class="owner">Keigen</td><td class="date">09/27/2026</td></tr>
@@ -135,12 +143,12 @@
   </section>
 
   <section class="blockers">
-    <h2><span class="dotmark"></span> Blockers <span class="sec-count">0 open</span></h2>
+    <h2><span class="dotmark"></span> Blockers <span class="sec-count">1 open</span></h2>
     <div class="table-scroll">
       <table>
         <thead><tr><th>Task #</th><th>Action Required to Fix Blocker</th><th>Completion</th></tr></thead>
         <tbody>
-          <tr class="empty-row"><td colspan="3">No active blockers — add a row here if something stalls the team</td></tr>
+          <tr><td class="tasknum">3</td><td class="taskname">Data scope mismatch. Task 3 asks for a prototype with 2010–2019 data, but the team's dataset is ATP 2023 qualifying + Challenger. Ask Jing whether 2023 is acceptable or pull the 2010–2019 qual/Challenger files, which have the same 49 columns.<span class="tasknote">Owner: Keigen. Needed before the AWS migration starts.</span></td><td class="date">Open<span class="pill blocked">blocked</span></td></tr>
         </tbody>
       </table>
     </div>
